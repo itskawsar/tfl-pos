@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('business_id')->unsigned();
-            $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            // $table->integer('business_id')->unsigned();
+            // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            $table->foreignId('business_id')->unsigned()->constrained('business')->onDelete('cascade');
+
             $table->string('type')->index();
             $table->string('supplier_business_name')->nullable();
             $table->string('name');
@@ -30,10 +32,11 @@ return new class extends Migration
             $table->string('alternate_number')->nullable();
             $table->integer('pay_term_number')->nullable();
             $table->enum('pay_term_type', ['days', 'months'])->nullable();
-            $table->integer('created_by')->unsigned();
+            // $table->integer('created_by')->unsigned();
+            $table->foreignId('created_by')->unsigned()->constrained('users')->onDelete('cascade');
             $table->boolean('is_default')->default(0);
             $table->softDeletes();
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
