@@ -22,9 +22,9 @@ return new class extends Migration
                 'guard_name' => 'web',
             ],
         ];
-        foreach ($insert_data as $data) {
-            Permission::create($data);
-        }
+        // foreach ($insert_data as $data) {
+        //     Permission::create($data);
+        // }
 
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
