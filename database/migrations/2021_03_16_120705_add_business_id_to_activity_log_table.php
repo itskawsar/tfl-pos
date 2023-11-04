@@ -14,9 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('activity_log', function (Blueprint $table) {
-            $table->integer('business_id')->after('subject_type')->nullable();
-        });
+        // Schema::table('activity_log', function (Blueprint $table) {
+        //     $table->integer('business_id')->after('subject_type')->nullable();
+        // });
 
         // $activites = Activity::with(['causer'])->groupBy('causer_id')->get();
 
