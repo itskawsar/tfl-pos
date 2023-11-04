@@ -14,11 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('selling_price_groups', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->integer('business_id')->unsigned();
-            $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+
+            // $table->integer('business_id')->unsigned();
+            // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            $table->foreignId('business_id')->unsigned()->constrained('business')->onDelete('cascade');
+
             $table->softDeletes();
             $table->timestamps();
         });

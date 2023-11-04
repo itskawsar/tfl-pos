@@ -14,10 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('variation_value_templates', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->id();
             $table->string('name');
-            $table->integer('variation_template_id')->unsigned();
-            $table->foreign('variation_template_id')->references('id')->on('variation_templates')->onDelete('cascade');
+
+            // $table->integer('variation_template_id')->unsigned();
+            // $table->foreign('variation_template_id')->references('id')->on('variation_templates')->onDelete('cascade');
+            $table->foreignId('variation_template_id')->unsigned()->constrained('variation_templates')->onDelete('cascade');
+
             $table->timestamps();
 
             //Indexing

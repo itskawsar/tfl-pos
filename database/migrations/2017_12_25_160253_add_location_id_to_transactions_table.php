@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->integer('location_id')->unsigned()->after('business_id');
-            $table->foreign('location_id')->references('id')->on('business_locations');
+            // $table->integer('location_id')->unsigned()->after('business_id');
+            // $table->foreign('location_id')->references('id')->on('business_locations');
+            $table->foreignId('location_id')->unsigned()->after('business_id')->constrained('business_locations');
 
             $table->index('location_id');
         });

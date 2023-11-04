@@ -14,10 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_variations', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->id();
             $table->string('name');
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
+            // $table->integer('product_id')->unsigned();
+            // $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreignId('product_id')->unsigned()->constrained('products')->onDelete('cascade');
+
             $table->boolean('is_dummy')->default(1);
             $table->timestamps();
 

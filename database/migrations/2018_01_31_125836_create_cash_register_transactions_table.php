@@ -14,10 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cash_register_transactions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('cash_register_id')->unsigned();
-            $table->foreign('cash_register_id')->references('id')->on('cash_registers')
-                    ->onDelete('cascade');
+            // $table->increments('id');
+            $table->id();
+            
+            // $table->integer('cash_register_id')->unsigned();
+            // $table->foreign('cash_register_id')->references('id')->on('cash_registers')
+            //         ->onDelete('cascade');
+            $table->foreignId('cash_register_id')->unsigned()->constrained('cash_registers')->onDelete('cascade');
+
             $table->decimal('amount', 22, 4)->default(0);
             $table->enum('pay_method', ['cash', 'card', 'cheque', 'bank_transfer', 'other']);
             $table->enum('type', ['debit', 'credit']);

@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('dashboard_configurations', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('business_id')->unsigned();
-            $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            // $table->integer('business_id')->unsigned();
+            // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            $table->foreignId('business_id')->unsigned()->constrained('business')->onDelete('cascade');
 
             $table->integer('created_by');
             $table->string('name');

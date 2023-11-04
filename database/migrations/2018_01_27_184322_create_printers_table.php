@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('printers', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->id();
 
-            $table->integer('business_id')->unsigned();
-            $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            // $table->integer('business_id')->unsigned();
+            // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            $table->foreignId('business_id')->unsigned()->constrained('business')->onDelete('cascade');
 
             $table->string('name');
             $table->enum('connection_type', ['network', 'windows', 'linux']);

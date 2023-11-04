@@ -27,19 +27,29 @@ return new class extends Migration
         // }
 
         Schema::create('bookings', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('contact_id')->unsigned();
-            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
+            // $table->increments('id');
+            $table->id();
+
+            // $table->integer('contact_id')->unsigned();
+            // $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
+            $table->foreignId('contact_id')->unsigned()->constrained('contacts')->onDelete('cascade');
+
             $table->integer('waiter_id')->unsigned()->nullable();
             $table->integer('table_id')->unsigned()->nullable();
             $table->integer('correspondent_id')->nullable();
-            $table->integer('business_id')->unsigned();
-            $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+
+            // $table->integer('business_id')->unsigned();
+            // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            $table->foreignId('business_id')->unsigned()->constrained('business')->onDelete('cascade');
+
             $table->integer('location_id')->unsigned();
             $table->dateTime('booking_start');
             $table->dateTime('booking_end');
-            $table->integer('created_by')->unsigned();
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+
+            // $table->integer('created_by')->unsigned();
+            // $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('created_by')->unsigned()->constrained('users')->onDelete('cascade');
+
             $table->enum('booking_status', ['booked', 'completed', 'cancelled']);
             $table->text('booking_note')->nullable();
             $table->timestamps();

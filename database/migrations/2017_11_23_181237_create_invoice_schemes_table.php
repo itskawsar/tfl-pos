@@ -14,9 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoice_schemes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('business_id')->unsigned();
-            $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            // $table->increments('id');
+            $table->id();
+            
+            // $table->integer('business_id')->unsigned();
+            // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            $table->foreignId('business_id')->unsigned()->constrained('business')->onDelete('cascade');
+
             $table->string('name');
             $table->enum('scheme_type', ['blank', 'year']);
             $table->string('prefix')->nullable();

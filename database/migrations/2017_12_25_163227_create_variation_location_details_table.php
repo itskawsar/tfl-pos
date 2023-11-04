@@ -14,16 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('variation_location_details', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->id();
 
             $table->integer('product_id')->unsigned();
             $table->integer('product_variation_id')->unsigned()->comment('id from product_variations table');
 
-            $table->integer('variation_id')->unsigned();
-            $table->foreign('variation_id')->references('id')->on('variations');
+            // $table->integer('variation_id')->unsigned();
+            // $table->foreign('variation_id')->references('id')->on('variations');
+            $table->foreignId('variation_id')->unsigned()->constrained('variations')->onDelete('cascade');
 
-            $table->integer('location_id')->unsigned();
-            $table->foreign('location_id')->references('id')->on('business_locations');
+            // $table->integer('location_id')->unsigned();
+            // $table->foreign('location_id')->references('id')->on('business_locations');
+            $table->foreignId('location_id')->unsigned()->constrained('business_locations')->onDelete('cascade');
 
             $table->decimal('qty_available', 22, 4)->default(0);
 

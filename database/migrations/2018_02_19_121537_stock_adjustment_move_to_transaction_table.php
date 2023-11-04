@@ -21,14 +21,22 @@ return new class extends Migration
         DB::statement('DROP TABLE IF EXISTS stock_adjustment_lines');
 
         Schema::create('stock_adjustment_lines', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('transaction_id')->unsigned();
-            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->integer('variation_id')->unsigned();
-            $table->foreign('variation_id')->references('id')->on('variations')
-            ->onDelete('cascade');
+            // $table->increments('id');
+            $table->id();
+            
+            // $table->integer('transaction_id')->unsigned();
+            // $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
+            $table->foreignId('transaction_id')->unsigned()->constrained('transactions')->onDelete('cascade');
+            
+            // $table->integer('product_id')->unsigned();
+            // $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreignId('product_id')->unsigned()->constrained('products')->onDelete('cascade');
+
+            // $table->integer('variation_id')->unsigned();
+            // $table->foreign('variation_id')->references('id')->on('variations')
+            // ->onDelete('cascade');
+            $table->foreignId('variation_id')->unsigned()->constrained('variations')->onDelete('cascade');
+
             $table->decimal('quantity', 22, 4);
             $table->decimal('unit_price', 22, 4)->comment('Last purchase unit price')->nullable();
             $table->timestamps();

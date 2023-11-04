@@ -1,6 +1,6 @@
 <?php
 
-use App\Transaction;
+use App\Models\Transaction;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE transactions MODIFY COLUMN `status` VARCHAR(191) NOT NULL;');
+        // DB::statement('ALTER TABLE transactions MODIFY COLUMN `status` VARCHAR(191) NOT NULL;');
 
         Transaction::where('type', 'sell_transfer')
                 ->update(['status' => 'final']);

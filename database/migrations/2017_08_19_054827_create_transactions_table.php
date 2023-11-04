@@ -14,20 +14,30 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('business_id')->unsigned();
-            $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            // $table->increments('id');
+            $table->id();
+
+            // $table->integer('business_id')->unsigned();
+            // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            $table->foreignId('business_id')->unsigned()->constrained('business')->onDelete('cascade');
+
             $table->enum('type', ['purchase', 'sell']);
             $table->enum('status', ['received', 'pending', 'ordered', 'draft', 'final']);
             $table->enum('payment_status', ['paid', 'due']);
-            $table->integer('contact_id')->unsigned();
-            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
+
+            // $table->integer('contact_id')->unsigned();
+            // $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
+            $table->foreignId('contact_id')->unsigned()->constrained('contacts')->onDelete('cascade');
+
             $table->string('invoice_no')->nullable();
             $table->string('ref_no')->nullable();
             $table->dateTime('transaction_date');
             $table->decimal('total_before_tax', 22, 4)->default(0)->comment('Total before the purchase/invoice tax, this includeds the indivisual product tax');
-            $table->integer('tax_id')->unsigned()->nullable();
-            $table->foreign('tax_id')->references('id')->on('tax_rates')->onDelete('cascade');
+
+            // $table->integer('tax_id')->unsigned()->nullable();
+            // $table->foreign('tax_id')->references('id')->on('tax_rates')->onDelete('cascade');
+            $table->foreignId('tax_id')->unsigned()->constrained('tax_rates')->onDelete('cascade');
+
             $table->decimal('tax_amount', 22, 4)->default(0);
             $table->enum('discount_type', ['fixed', 'percentage'])->nullable();
             $table->decimal('discount_amount', 22, 4)->default(0);
@@ -36,8 +46,11 @@ return new class extends Migration
             $table->text('additional_notes')->nullable();
             $table->text('staff_note')->nullable();
             $table->decimal('final_total', 22, 4)->default(0);
-            $table->integer('created_by')->unsigned();
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+
+            // $table->integer('created_by')->unsigned();
+            // $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('created_by')->unsigned()->constrained('users')->onDelete('cascade');
+            
             $table->timestamps();
 
             //Indexing

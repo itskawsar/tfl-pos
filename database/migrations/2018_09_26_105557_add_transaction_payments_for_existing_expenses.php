@@ -1,7 +1,7 @@
 <?php
 
-use App\Transaction;
-use App\TransactionPayment;
+use App\Models\Transaction;
+use App\Models\TransactionPayment;
 use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration

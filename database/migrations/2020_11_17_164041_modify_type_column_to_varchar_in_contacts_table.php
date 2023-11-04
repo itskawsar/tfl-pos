@@ -1,6 +1,6 @@
 <?php
 
-use App\Contact;
+use App\Models\Contact;
 use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration

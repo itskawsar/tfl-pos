@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoice_layouts', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->text('header_text')->nullable();
             $table->string('invoice_no_prefix')->nullable();
@@ -43,8 +44,11 @@ return new class extends Migration
             $table->string('highlight_color', 10)->nullable();
             $table->text('footer_text')->nullable();
             $table->boolean('is_default')->default(0);
-            $table->integer('business_id')->unsigned();
-            $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+
+            // $table->integer('business_id')->unsigned();
+            // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            $table->foreignId('business_id')->unsigned()->constrained('business')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

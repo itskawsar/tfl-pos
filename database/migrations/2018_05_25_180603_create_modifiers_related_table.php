@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('res_product_modifier_sets', function (Blueprint $table) {
-            $table->integer('modifier_set_id')->unsigned();
-            $table->foreign('modifier_set_id')->references('id')->on('products')->onDelete('cascade');
+            // $table->integer('modifier_set_id')->unsigned();
+            // $table->foreign('modifier_set_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreignId('modifier_set_id')->unsigned()->constrained('products')->onDelete('cascade');
+
             $table->integer('product_id')->unsigned()->comment('Table use to store the modifier sets applicable for a product');
         });
     }

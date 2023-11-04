@@ -14,13 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('variations', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->id();
             $table->string('name');
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
+            // $table->integer('product_id')->unsigned();
+            // $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreignId('product_id')->unsigned()->constrained('products')->onDelete('cascade');
+
             $table->string('sub_sku')->nullable();
-            $table->integer('product_variation_id')->unsigned();
-            $table->foreign('product_variation_id')->references('id')->on('product_variations')->onDelete('cascade');
+
+            // $table->integer('product_variation_id')->unsigned();
+            // $table->foreign('product_variation_id')->references('id')->on('product_variations')->onDelete('cascade');
+            $table->foreignId('product_variation_id')->unsigned()->constrained('product_variations')->onDelete('cascade');
+
             $table->decimal('default_purchase_price', 22, 4)->nullable();
             $table->decimal('dpp_inc_tax', 22, 4)->default(0);
             $table->decimal('profit_percent', 22, 4)->default(0);

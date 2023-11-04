@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('business', function (Blueprint $table) {
-            $table->integer('default_sales_tax')->unsigned()->nullable()->after('tax_label_2');
-            $table->foreign('default_sales_tax')->references('id')->on('tax_rates');
+            // $table->integer('default_sales_tax')->unsigned()->nullable()->after('tax_label_2');
+            // $table->foreign('default_sales_tax')->references('id')->on('tax_rates');
+            $table->foreignId('default_sales_tax')->nullable()->after('tax_label_2')->unsigned()->constrained('tax_rates');
         });
     }
 

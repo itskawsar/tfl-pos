@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::dropIfExists('accounts');
 
         Schema::create('accounts', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->id();
 
             $table->integer('business_id');
             $table->string('name');

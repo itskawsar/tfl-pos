@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('barcodes', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->id();
+            
             $table->string('name');
             $table->text('description')->nullable();
             $table->float('width', 22, 4)->nullable();
@@ -29,8 +31,10 @@ return new class extends Migration
             $table->boolean('is_default')->default(0);
             $table->boolean('is_continuous')->default(0);
             $table->integer('stickers_in_one_sheet')->nullable();
-            $table->integer('business_id')->unsigned()->nullable();
-            $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            // $table->integer('business_id')->unsigned()->nullable();
+            // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
+            $table->foreignId('business_id')->unsigned()->nullable()->constrained('business')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tax_rates', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->id();
 
             // $table->integer('business_id')->unsigned();
             // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');

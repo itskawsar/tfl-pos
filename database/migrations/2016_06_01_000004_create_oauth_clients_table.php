@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('variation_templates', function (Blueprint $table) {
-            // $table->increments('id');
-            $table->id();
+        Schema::create('oauth_clients', function (Blueprint $table) {
+            $table->increments('id');
+            $table->bigInteger('user_id')->index()->nullable();
             $table->string('name');
-
-            // $table->integer('business_id')->unsigned();
-            // $table->foreign('business_id')->references('id')->on('business')->onDelete('cascade');
-            $table->foreignId('business_id')->unsigned()->constrained('business')->onDelete('cascade');
-
+            $table->string('secret', 100);
+            $table->text('redirect');
+            $table->boolean('personal_access_client');
+            $table->boolean('password_client');
+            $table->boolean('revoked');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variation_templates');
+        Schema::dropIfExists('oauth_clients');
     }
 };
