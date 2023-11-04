@@ -18,12 +18,12 @@ return new class extends Migration
             $table->integer('business_id')->after('subject_type')->nullable();
         });
 
-        $activites = Activity::with(['causer'])->groupBy('causer_id')->get();
+        // $activites = Activity::with(['causer'])->groupBy('causer_id')->get();
 
-        foreach ($activites as $activity) {
-            Activity::where('causer_id', $activity->causer_id)
-                ->update(['business_id' => $activity->causer->business_id ?? null]);
-        }
+        // foreach ($activites as $activity) {
+        //     Activity::where('causer_id', $activity->causer_id)
+        //         ->update(['business_id' => $activity->causer->business_id ?? null]);
+        // }
     }
 
     /**
