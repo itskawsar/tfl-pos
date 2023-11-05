@@ -22,7 +22,10 @@ return new class extends Migration
             // $table->increments('id');
             $table->id();
             $table->string('name');
-            $table->integer('currency_id')->unsigned();
+            // $table->integer('currency_id')->unsigned();
+            // $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->foreignId('currency_id')->nullable()->constrained('currencies')->nullOnDelete();
+
             $table->date('start_date')->nullable();
             $table->string('tax_number_1', 100);
             $table->string('tax_label_1', 10);
@@ -33,12 +36,12 @@ return new class extends Migration
             // $table->integer('owner_id')->unsigned();
             // $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
+
             $table->string('time_zone')->default('Asia/Kolkata');
             $table->tinyInteger('fy_start_month')->default(1);
             $table->enum('accounting_method', ['fifo', 'lifo', 'avco'])->default('fifo');
             $table->decimal('default_sales_discount', 5, 2)->nullable();
             $table->enum('sell_price_tax', ['includes', 'excludes'])->default('includes');
-            $table->foreign('currency_id')->references('id')->on('currencies');
             $table->string('logo')->nullable();
             $table->string('sku_prefix')->nullable();
             $table->boolean('enable_tooltip')->default(1);
