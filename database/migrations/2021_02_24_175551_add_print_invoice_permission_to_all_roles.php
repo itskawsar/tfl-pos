@@ -13,21 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        //check if permission exists
-        // $permission_exists = Permission::where('name', 'print_invoice')
-        //                             ->exists();
+        // check if permission exists
+        $permission_exists = Permission::where('name', 'print_invoice')
+                                    ->exists();
 
-        // if (! $permission_exists) {
-        //     Permission::create([
-        //         'name' => 'print_invoice',
-        //         'guard_name' => 'web',
-        //     ]);
-        // }
-        // $roles = Role::all();
+        if (! $permission_exists) {
+            Permission::create([
+                'name' => 'print_invoice',
+                'guard_name' => 'web',
+            ]);
+        }
+        $roles = Role::all();
 
-        // foreach ($roles as $role) {
-        //     $role->givePermissionTo('print_invoice');
-        // }
+        foreach ($roles as $role) {
+            $role->givePermissionTo('print_invoice');
+        }
     }
 
     /**

@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        // Permission::create(['name' => 'view_own_sell_only']);
+        Permission::create(['name' => 'view_own_sell_only']);
     }
 
     /**

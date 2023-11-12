@@ -12,10 +12,10 @@ return new class extends Migration
      */
     public function up()
     {
-        // Permission::create(['name' => 'roles.view']);
-        // Permission::create(['name' => 'roles.create']);
-        // Permission::create(['name' => 'roles.update']);
-        // Permission::create(['name' => 'roles.delete']);
+        Permission::create(['name' => 'roles.view']);
+        Permission::create(['name' => 'roles.create']);
+        Permission::create(['name' => 'roles.update']);
+        Permission::create(['name' => 'roles.delete']);
     }
 
     /**

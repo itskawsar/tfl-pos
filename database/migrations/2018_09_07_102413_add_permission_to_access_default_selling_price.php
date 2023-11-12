@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        //Create a new permission related to the created selling price group
-        // Permission::create(['name' => 'access_default_selling_price']);
+        // Create a new permission related to the created selling price group
+        Permission::create(['name' => 'access_default_selling_price']);
 
-        // $roles = Role::get();
-        // foreach ($roles as $role) {
-        //     $role->givePermissionTo('access_default_selling_price');
-        // }
+        $roles = Role::get();
+        foreach ($roles as $role) {
+            $role->givePermissionTo('access_default_selling_price');
+        }
     }
 
     /**
